@@ -2,6 +2,7 @@ package quotes
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"os"
 	"text/template"
@@ -17,9 +18,10 @@ func RunGetQuote() func(cmd *cobra.Command, args []string) {
 
 		endpoint := viper.GetString("endpoint")
 		id := viper.GetString("id")
+		tpl := viper.GetString("templates")
 
 		// Load the output template
-		t := template.Must(template.ParseFiles("templates/quote.tpl"))
+		t := template.Must(template.ParseFiles(fmt.Sprintf("%s/quote.tpl", tpl)))
 
 		config := &swagger.Configuration{
 			BasePath:      endpoint,

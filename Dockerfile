@@ -1,6 +1,9 @@
 ARG GO_VERSION=1.14
 
-FROM golang:${GO_VERSION} AS builder
+FROM golang:${GO_VERSION}-alpine AS builder
+
+# Git is required for fetching the dependencies.
+RUN apk add --no-cache ca-certificates git
 
 # Set the Current Working Directory inside the container
 WORKDIR /app
@@ -25,6 +28,10 @@ LABEL maintainer="Tech Simplifier"
 
 # Copy binary from build process to container
 COPY --from=builder /app/test-sigma-cpq-api /usr/bin/test-sigma-cpq-api
+COPY --from=builder /app/templates /templates
+
+# Import the root ca-certificates (required for Let's Encrypt)
+COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 # Use non root user
 USER 1000
