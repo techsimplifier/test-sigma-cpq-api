@@ -13,6 +13,10 @@ You must have [Docker](https://www.docker.com/) installed for the commands to wo
 
 ### Build it
 ```bash
+mkdir techsimplifier
+cd techsimplifier
+git clone https://github.com/techsimplifier/test-sigma-cpq-api.git
+cd test-sigma-cpq-api
 docker build -t test-sigma-cpq-api:0.0.0 .
 ```
 
