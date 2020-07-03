@@ -20,3 +20,8 @@ docker build -t test-sigma-cpq-api:0.0.0 .
 ```bash
 docker run test-sigma-cpq-api:0.0.0 quotes get --help
 ```
+
+## Lookup a Quote
+```
+docker run test-sigma-cpq-api:0.0.0 quotes get --templates ./templates --endpoint https://localhost --id 4a1d8c86-5431-4d5c-b481-7479b35152b0
+```
